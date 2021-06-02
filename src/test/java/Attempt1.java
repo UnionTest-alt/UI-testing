@@ -9,5 +9,6 @@ public class Attempt1 {
 
         System.out.println();
         System.out.println();
+        System.out.println();
     }
 }
