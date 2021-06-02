@@ -1,9 +1,8 @@
-import java.lang.reflect.Array;
+import java.sql.Array;
+import java.util.Arrays;
 
 public class Attempt1 {
     public static void main(String[] args) {
-        String [] str={"Me", "Myself", "and", "I"};
-
 
     }
 }
