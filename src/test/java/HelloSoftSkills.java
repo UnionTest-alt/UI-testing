@@ -3,5 +3,6 @@ public class HelloSoftSkills {
         System.out.println("Hello Soft Skills today is Friday 06/04/21 ");
 
 
+
     }
 }
