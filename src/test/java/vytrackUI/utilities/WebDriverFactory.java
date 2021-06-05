@@ -11,10 +11,22 @@ public class WebDriverFactory {
     public static void main(String[] args) {
 
 
-     WebDriverManager.chromedriver().setup();
-    WebDriver driver =new ChromeDriver();
+        getDriver("chrome").get("http://www.google.com");
 
-        driver.manage().window().maximize();
-        driver.get("https://google.com");
+    }
+
+    public static WebDriver getDriver(String browserType) {
+        WebDriver driver =null;
+        if (browserType.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
+            return  new ChromeDriver();
+
+        } else if (browserType.equalsIgnoreCase("firefox")) {
+            WebDriverManager.firefoxdriver().setup();
+            return new FirefoxDriver();
+
+
+        }
+        return driver;
     }
 }
