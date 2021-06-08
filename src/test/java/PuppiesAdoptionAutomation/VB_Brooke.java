@@ -32,7 +32,7 @@ public class VB_Brooke {
         driver.close();
     }
 /*
-     TC1: Given I am on a home page of Puppy Adoption Agency
+     TC001: Given I am on a home page of Puppy Adoption Agency
           And I see Brook in the Puppy List
           When I click View Details button
           Then I am navigated to a page with Brook's short description
@@ -56,6 +56,33 @@ public class VB_Brooke {
         Assert.assertEquals(puppyName, expectedPuppyName);
         Assert.assertEquals(breed, expectedBreed);
         Assert.assertEquals(description, expectedDescription);
+    }
+
+    /*
+         TC002: Given I am pn Brook's description page
+                When I click Adopt me! button
+                Then I am navigated to Brook's My Litter page
+     */
+
+
+    @Test(priority = 2)
+    public void TC002() {
+        driver.get("http://puppies.herokuapp.com/");
+        WebElement viewDetailsButton = driver.findElement(By.xpath("//h3[.='Brook']/../..//div//input[@value='View Details']"));
+        viewDetailsButton.click();
+
+        WebElement adoptMeButton = driver.findElement(By.xpath("//div/input[@value='Adopt Me!']"));
+        adoptMeButton.click();
+
+        WebElement verifyName = driver.findElement(By.xpath("(//div[@id='content']//table/tbody/tr/td/h2)[1]"));
+        String expName = "Brook:";
+
+        WebElement verifyBreed = driver.findElement(By.xpath("(//div[@id='content']//table/tbody/tr/td/h2)[2]"));
+        String expBreed = "Female - Golden Retriever";
+
+        Assert.assertEquals(verifyName.getText(), expName);
+        Assert.assertEquals(verifyBreed.getText(), expBreed);
+
     }
 
 }
