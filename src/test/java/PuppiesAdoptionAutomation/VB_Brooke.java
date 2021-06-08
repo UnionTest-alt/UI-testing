@@ -59,7 +59,10 @@ public class VB_Brooke {
     }
 
     /*
-         TC002: Given I am pn Brook's description page
+         TC002: Given I am on a home page
+                And I see Brook in the Puppy List
+                And I click View Details button
+                And I am on Brook's description page
                 When I click Adopt me! button
                 Then I am navigated to Brook's My Litter page
      */
@@ -82,6 +85,66 @@ public class VB_Brooke {
 
         Assert.assertEquals(verifyName.getText(), expName);
         Assert.assertEquals(verifyBreed.getText(), expBreed);
+
+    }
+
+    /*
+         TC003: Given I am on a home page
+                And I see Brook in the Puppy List
+                And I click View Details button
+                And I am on Brook's description page
+                And I click Adopt me! button
+                And I am on the Brook's My Litter page
+                When I choose to add a Chewy Toy and a Travel Carrier
+                Then I should be able to see their prices pop up on the right side
+     */
+
+    @Test(priority = 3)
+    public void TC003() {
+        driver.get("http://puppies.herokuapp.com/");
+        WebElement viewDetailsButton = driver.findElement(By.xpath("//h3[.='Brook']/../..//div//input[@value='View Details']"));
+        viewDetailsButton.click();
+
+        WebElement adoptMeButton = driver.findElement(By.xpath("//div/input[@value='Adopt Me!']"));
+        adoptMeButton.click();
+
+//        WebElement priceForBrook = driver.findElement(By.xpath("//div[@id='content']//table//td[@class='item_price']"));
+//        WebElement totalAmount = driver.findElement(By.xpath("//div[@id='content']//table//td[@class='total_cell']"));
+//
+//        Assert.assertEquals(priceForBrook, totalAmount);
+
+        WebElement chewyCheckBox = driver.findElement(By.xpath("//div[@id='content']//table//td//input[@id='toy']"));
+        WebElement chewyPrice = driver.findElement(By.xpath("//div[@id='content']//table//td//div[@class='toy-amount']"));
+
+        if (!chewyCheckBox.isSelected()) {
+            Assert.assertTrue(!chewyPrice.isDisplayed());
+        } else {
+            System.out.println("BUG: price should not be visible");
+        }
+
+        WebElement travelCarrierBox = driver.findElement(By.xpath("//div[@id='content']//table//td//input[@id='carrier']"));
+        WebElement carrierPrice = driver.findElement(By.xpath("//div[@id='content']//table//td//div[@class='carrier-amount']"));
+
+        if (!travelCarrierBox.isSelected()) {
+            Assert.assertTrue(!carrierPrice.isDisplayed());
+        } else {
+            System.out.println("BUG: price should not be visible");
+        }
+
+        chewyCheckBox.click();
+        travelCarrierBox.click();
+
+        if (chewyCheckBox.isSelected()) {
+            Assert.assertTrue(chewyPrice.isDisplayed());
+        } else {
+            System.out.println("BUG: price should be visible");
+        }
+
+        if (travelCarrierBox.isSelected()) {
+            Assert.assertTrue(carrierPrice.isDisplayed());
+        } else {
+            System.out.println("BUG: price should be visible");
+        }
 
     }
 
