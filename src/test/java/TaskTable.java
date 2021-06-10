@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import vytrackUI.utilities.WebDriverFactory;
 
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -88,8 +89,36 @@ public class TaskTable {
         System.out.println("Print Object Pascal (Delphi)---> "+ driver.findElement(By.xpath("(//*[text()='object-oriented'])[30]")).getText());
 
 
+        WebElement python = driver.findElement(By.xpath("((//table)[2]//tr)[72]/following-sibling::tr[8]//th"));
+        System.out.println("Python ----> following-Sibling "+ python.getText());
 
-        }
+        WebElement ruby = driver.findElement(By.xpath("((//table)[2]//tr)[72]/following-sibling::tr[15]//th"));
+        System.out.println("Ruby ---->   Following-Sibling "+ruby.getText());
+
+        WebElement visualBasic = driver.findElement(By.xpath("((//table)[2]//tr)[102]/following-sibling::tr[2]//th"));
+        System.out.println("Visual Basic ----> Following-Sibling "+ visualBasic.getText());
+
+        WebElement java = driver.findElement(By.xpath("((//table)[2]//tr)[40]/following-sibling::tr[5]//th"));
+        System.out.println("Java ----> Following-Sibling "+java.getText());
+
+        WebElement fortran = driver.findElement(By.xpath("((//table)[2]//tr)[68]/preceding-sibling::tr[34]//th"));
+        System.out.println("Fortran ----> Preceding-Sibling "+ fortran.getText());
+
+
+        WebElement cPlus = driver.findElement(By.xpath("((//table)[2]//tr)[28]/preceding-sibling::tr[15]//th"));
+        System.out.println("C++ ----> Preceding-Sibling "+cPlus.getText());
+
+        WebElement algol68 = driver.findElement(By.xpath("((//table)[2]//tr)[48]/preceding-sibling::tr[43]//th"));
+        System.out.println("Algol68 -----> Preceding Following "+ algol68.getText());
+
+        WebElement cSharp = driver.findElement(By.xpath("((//table)[2]//tr[38]/..//..)[688]"));
+        System.out.println("Print NO from Groovy -----> "+cSharp.getText());
+
+       WebElement groovy = driver.findElement(By.xpath("((//table)[2]//tr[38]/..//..)[689]"));
+       System.out.println("Print STRONG from Groovy ----> "+ groovy.getText());
+
+
+}
 
     }
 
