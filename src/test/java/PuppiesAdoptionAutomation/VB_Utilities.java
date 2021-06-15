@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Double.parseDouble;
@@ -20,24 +21,48 @@ public class VB_Utilities {
         adoptMeButton.click();
     }
 
-    public void viewDetailsClick(int index) {
-        switch(index) {
-            case 1: driver.findElement(By.xpath("(//input[@value='View Details'])[1]")).click();
-            break;
-            case 2: driver.findElement(By.xpath("(//input[@value='View Details'])[2]")).click();
-            break;
-            case 3: driver.findElement(By.xpath("(//input[@value='View Details'])[3]")).click();
-            break;
-            case 4: driver.findElement(By.xpath("(//input[@value='View Details'])[4]")).click();
-            break;
+    public WebElement findDogInTheList(String dogName) {
+        List<WebElement> namesPageOne = driver.findElements(By.xpath("//h3"));
+        List<WebElement> detailsButton = driver.findElements(By.xpath("//input[@value='View Details']"));
+        for (int i = 0; i < namesPageOne.size(); i++) {
+            if (namesPageOne.get(i).getText().equals(dogName)) {
+                return detailsButton.get(i);
+            }
         }
 
+        nextPage();
+
+        List<WebElement> namesPageTwo = driver.findElements(By.xpath("//h3"));
+        List<WebElement> detailsButtonPageTwo = driver.findElements(By.xpath("//input[@value='View Details']"));
+        for (int i = 0; i < namesPageTwo.size(); i++) {
+            if (namesPageTwo.get(i).getText().equals(dogName)) {
+                return detailsButtonPageTwo.get(i);
+            }
+        }
+
+        nextPage();
+
+        List<WebElement> namesPageThree = driver.findElements(By.xpath("//h3"));
+        List<WebElement> detailsButtonPageThree = driver.findElements(By.xpath("//input[@value='View Details']"));
+        for (int i = 0; i < namesPageThree.size(); i++) {
+            if (namesPageThree.get(i).getText().equals(dogName)) {
+                return detailsButtonPageThree.get(i);
+            }
+        }
+        return null;
     }
 
-    public String getPuppyName() {
-        String name = driver.findElement(By.xpath("//div//h2")).getText();
+    public String getPuppyNameOnDescriptionPage() {
+        String name = driver.findElement(By.xpath("//h2")).getText();
         return name;
     }
+
+
+    public void nextPage() {
+        WebElement nextButton = driver.findElement(By.xpath("//a[.='Next →']"));
+        nextButton.click();
+    }
+
 
     public String getBreed() {
         String breed = driver.findElement(By.xpath("//div//h3")).getText();
@@ -91,14 +116,9 @@ public class VB_Utilities {
         return parseDouble(price);
     }
 
-    public double getPuppyPrice(String name) {
-        String price = "";
-        switch(name) {
-            case "Brook":
-                price = driver.findElement(By.xpath("//div[@id='content']//table//td[@class='item_price']")).getText().substring(1);
-                break;
-        }
-        return parseDouble(price);
+    public double getPuppyPrice() {
+        double price =Double.parseDouble(driver.findElement(By.xpath("//td[@class='item_price']/h2")).getText().substring(1));
+        return price;
     }
 
     public double totalBeforeAddingProducts() {
@@ -161,6 +181,11 @@ public class VB_Utilities {
     public WebElement homePagePuppyList() {
         WebElement list = driver.findElement(By.xpath("//h1[.='Puppy List']"));
         return list;
+    }
+
+    public double actualTotal() {
+        double total = parseDouble(driver.findElement(By.xpath("(//tr[@class='total_line']//h2)[2]")).getText().substring(1));
+        return total;
     }
 
 
