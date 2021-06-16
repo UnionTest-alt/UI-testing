@@ -52,6 +52,7 @@ public class VB_Utilities {
         return null;
     }
 
+
     public String getPuppyNameOnDescriptionPage() {
         String name = driver.findElement(By.xpath("//h2")).getText();
         return name;
